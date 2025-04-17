@@ -30,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('web')
+            ->path('admin')
             ->login(Login::class)
             ->colors([
                 'primary' => Color::Blue,
