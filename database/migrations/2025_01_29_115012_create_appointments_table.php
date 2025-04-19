@@ -11,15 +11,15 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('appointments', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->timestamps();
-            $table->foreignId('patient_id')
+            $table->foreignUlid('patient_id')
                 ->nullable()
                 ->constrained('patients')
                 ->onDelete('cascade');
             $table->dateTime('appointment_date')
                 ->nullable();
-            $table->foreignId('status_id')
+            $table->foreignUlid('status_id')
                 ->nullable()
                 ->constrained('appointment_statuses')
                 ->nullOnDelete();

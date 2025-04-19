@@ -11,19 +11,19 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->timestamps();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('tel')->nullable();
             $table->string('hn')->nullable();
             $table->string('pass_id')->nullable();
-            $table->foreignId('gender_id')
+            $table->foreignUlid('gender_id')
                 ->nullable()
                 ->constrained('genders')
                 ->nullOnDelete();
             $table->date('birth_date');
-            $table->foreignId('card_id')
+            $table->foreignUlid('card_id')
                 ->nullable()
                 ->constrained('cards')
                 ->nullOnDelete();

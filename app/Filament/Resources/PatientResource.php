@@ -41,6 +41,8 @@ class PatientResource extends Resource
                     ->required()
                     ->options(Gender::all()->pluck('name', 'id')),
                 Forms\Components\DatePicker::make('birth_date')
+                    ->minDate(now()->subYears(150))
+                    ->maxDate(now())
                     ->required(),
                 Forms\Components\TextInput::make('hn')
                     ->required(),
