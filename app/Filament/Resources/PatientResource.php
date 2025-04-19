@@ -22,8 +22,16 @@ class PatientResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\FileUpload::make('avatar')
+                    ->hiddenLabel()
+                    ->avatar()
+                    ->alignCenter()
+                    ->columnSpanFull()
+                    ->directory('patients')
+                    ->visibility('public'),
                 Forms\Components\TextInput::make('first_name')
-                    ->required(),
+                    ->required()
+                    ->columnStart(1),
                 Forms\Components\TextInput::make('last_name')
                     ->required(),
                 Forms\Components\TextInput::make('tel')
@@ -58,6 +66,9 @@ class PatientResource extends Resource
                 Tables\Columns\TextColumn::make('row_id')
                     ->label('#')
                     ->rowIndex(),
+                Tables\Columns\ImageColumn::make('avatar')
+                    ->label('')
+                    ->circular(),
                 Tables\Columns\TextColumn::make('first_name')
                     ->searchable()
                     ->sortable(),

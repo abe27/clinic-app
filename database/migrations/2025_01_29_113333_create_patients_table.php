@@ -27,6 +27,7 @@ return new class extends Migration {
                 ->nullable()
                 ->constrained('cards')
                 ->nullOnDelete();
+            $table->string('avatar')->nullable();
         });
     }
 

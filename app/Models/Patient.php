@@ -15,6 +15,7 @@ class Patient extends Model
         'gender_id',
         'birth_date',
         'card_id',
+        'avatar',
     ];
 
     public function gender()
