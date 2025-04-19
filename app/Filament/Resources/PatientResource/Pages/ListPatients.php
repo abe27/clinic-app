@@ -27,7 +27,7 @@ class ListPatients extends ListRecords
                     // $newNumber = $lastCard ? str_pad($lastCard->id + 1, 6, '0', STR_PAD_LEFT) : '000001';
 
                     // สร้าง Card ใหม่พร้อมหมายเลขที่สร้างขึ้น
-                    $card = Card::create(['number' => $data['card_id']]);
+                    $card = Card::updateOrcreate(['number' => $data['card_id']]);
                     // ผูก card_id กับ Patient
                     $data['card_id'] = $card->id;
                     return $data;
