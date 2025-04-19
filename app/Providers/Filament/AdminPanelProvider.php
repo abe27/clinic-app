@@ -19,9 +19,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 use App\Filament\Auth\Login;
-use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Filament\Navigation\MenuItem;
-use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -60,23 +58,6 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->userMenuItems([
-                'edit-profile' => MenuItem::make()
-                    // ->label(fn() => auth()->user()->name)
-                    ->label('Edit Profile')
-                    ->url(fn(): string => EditProfilePage::getUrl())
-                    ->icon('heroicon-m-pencil-square')
-            ])
-            ->plugins([
-                FilamentEditProfilePlugin::make()
-                    ->shouldRegisterNavigation(false)
-                    ->shouldShowDeleteAccountForm()
-                    ->shouldShowBrowserSessionsForm()
-                    ->shouldShowEditProfileForm(false)
-                    ->shouldShowAvatarForm()
-                    ->customProfileComponents([
-                        \App\Livewire\CustomProfileComponent::class,
-                    ])
-            ]);
+            ->plugins([]);
     }
 }

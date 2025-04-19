@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-Route::get('/', fn() => redirect('web'));
+Route::get('/', fn() => redirect('admin'));
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

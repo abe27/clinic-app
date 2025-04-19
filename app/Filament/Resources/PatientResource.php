@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PatientResource\Pages;
-use App\Filament\Resources\PatientResource\RelationManagers;
 use App\Models\Card;
 use App\Models\Gender;
 use App\Models\Patient;
@@ -12,8 +11,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PatientResource extends Resource
 {
@@ -41,13 +38,13 @@ class PatientResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('pass_id')
                     ->required(),
-                Forms\Components\Select::make('card_id')
-                    ->searchable()
-                    ->options(Card::all()->pluck('number', 'id'))
-                    ->disabled()
-                    ->hidden(fn($operation) => $operation === 'create'),
-                // Forms\Components\TextInput::make('card_id')
-                //     ->hidden(fn($operation) => $operation === 'edit'),
+                // Forms\Components\Select::make('card_id')
+                //     ->searchable()
+                //     ->options(Card::all()->pluck('number', 'id'))
+                //     ->disabled()
+                //     ->readOnlyOn('create'),
+                Forms\Components\TextInput::make('card_id')
+                    ->readOnlyOn('edit'),
             ]);
     }
 
