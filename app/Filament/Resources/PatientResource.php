@@ -37,14 +37,17 @@ class PatientResource extends Resource
                 Forms\Components\TextInput::make('hn')
                     ->required(),
                 Forms\Components\TextInput::make('pass_id')
+                    ->label('Pass ID')
                     ->required(),
-                // Forms\Components\Select::make('card_id')
-                //     ->searchable()
-                //     ->options(Card::all()->pluck('number', 'id'))
-                //     ->disabled()
-                //     ->readOnlyOn('create'),
+                Forms\Components\Select::make('card_id')
+                    ->label('Card ID')
+                    ->searchable()
+                    ->options(Card::all()->pluck('number', 'id'))
+                    ->disabled()
+                    ->hiddenOn('create'),
                 Forms\Components\TextInput::make('card_id')
-                    ->readOnlyOn('edit'),
+                    ->label('Card ID')
+                    ->hiddenOn('edit'),
             ]);
     }
 
@@ -52,14 +55,9 @@ class PatientResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('row_id')
+                    ->label('#')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('first_name')
                     ->searchable()
                     ->sortable(),
@@ -71,14 +69,26 @@ class PatientResource extends Resource
                 Tables\Columns\TextColumn::make('gender.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('birth_date')
-                    ->date()
+                    ->date('d-m-Y')
+                    ->badge()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('hn')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('pass_id')
+                    ->label('Pass ID')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('card.number')
+                    ->badge()
+                    ->color('warning')
                     ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->date('d-m-Y H:s:i')
+                    ->color('success')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->date('d-m-Y H:s:i')
+                    ->color('danger')
                     ->sortable(),
             ])
             ->filters([

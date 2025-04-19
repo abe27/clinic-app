@@ -10,6 +10,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -17,9 +18,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
 use App\Filament\Auth\Login;
-use Filament\Navigation\MenuItem;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -33,9 +32,23 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
+            ->unsavedChangesAlerts()
+            ->maxContentWidth(MaxWidth::Full)
+            ->sidebarWidth('15.5rem')
+            ->collapsedSidebarWidth('2rem')
+            ->navigation(true)
+            ->topbar(true)
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
+            ->font('Sarabun')
             ->sidebarFullyCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('2s')
+            // ->spa()
+            ->collapsibleNavigationGroups(true)
+            ->sidebarCollapsibleOnDesktop()
+            ->databaseTransactions()
             ->pages([
                 Pages\Dashboard::class,
             ])
