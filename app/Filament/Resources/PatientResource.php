@@ -29,6 +29,17 @@ class PatientResource extends Resource
                     ->columnSpanFull()
                     ->directory('patients')
                     ->visibility('public'),
+                Forms\Components\TextInput::make('card_id')
+                    ->label('Card ID')
+                    ->hiddenOn('edit')
+                    ->columnStart(1),
+                Forms\Components\Select::make('card_id')
+                    ->label('Card ID')
+                    ->searchable()
+                    ->options(Card::all()->pluck('number', 'id'))
+                    ->disabled()
+                    ->hiddenOn('create')
+                    ->columnStart(1),
                 Forms\Components\TextInput::make('first_name')
                     ->required()
                     ->columnStart(1),
@@ -48,16 +59,7 @@ class PatientResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('pass_id')
                     ->label('Pass ID')
-                    ->required(),
-                Forms\Components\Select::make('card_id')
-                    ->label('Card ID')
-                    ->searchable()
-                    ->options(Card::all()->pluck('number', 'id'))
-                    ->disabled()
-                    ->hiddenOn('create'),
-                Forms\Components\TextInput::make('card_id')
-                    ->label('Card ID')
-                    ->hiddenOn('edit'),
+                    ->default('-'),
             ]);
     }
 
