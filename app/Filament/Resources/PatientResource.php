@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class PatientResource extends Resource
@@ -41,22 +42,26 @@ class PatientResource extends Resource
                     ->hiddenOn('create')
                     ->columnStart(1),
                 Forms\Components\TextInput::make('first_name')
+                    ->label('First Name')
                     ->required()
                     ->columnStart(1),
                 Forms\Components\TextInput::make('last_name')
+                    ->label('Last Name')
                     ->required(),
                 Forms\Components\TextInput::make('tel')
-                    ->required()
+                    ->default('-')
                     ->tel(),
                 Forms\Components\Select::make('gender_id')
+                    ->label('Gender')
+                    ->searchable()
                     ->required()
                     ->options(Gender::all()->pluck('name', 'id')),
                 Forms\Components\DatePicker::make('birth_date')
                     ->minDate(now()->subYears(150))
                     ->maxDate(now())
-                    ->required(),
+                    ->default(now()),
                 Forms\Components\TextInput::make('hn')
-                    ->required(),
+                    ->default('-'),
                 Forms\Components\TextInput::make('pass_id')
                     ->label('Pass ID')
                     ->default('-'),
@@ -84,9 +89,11 @@ class PatientResource extends Resource
                 Tables\Columns\TextColumn::make('gender.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('birth_date')
-                    ->date('d-m-Y')
+                    // ->date('d-m-Y')
+                    ->since('Asia/Bangkok')
                     ->badge()
-                    ->sortable(),
+                    ->sortable()
+                    ->tooltip(fn($state) => $state),
                 Tables\Columns\TextColumn::make('hn')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('pass_id')
