@@ -78,6 +78,11 @@ class PatientResource extends Resource
                 Tables\Columns\ImageColumn::make('avatar')
                     ->label('')
                     ->circular(),
+                Tables\Columns\TextColumn::make('card.number')
+                    ->badge()
+                    ->color('warning')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('first_name')
                     ->searchable()
                     ->sortable(),
@@ -85,6 +90,7 @@ class PatientResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tel')
+                    ->color('success')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('gender.name')
                     ->sortable(),
@@ -99,11 +105,6 @@ class PatientResource extends Resource
                 Tables\Columns\TextColumn::make('pass_id')
                     ->label('Pass ID')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('card.number')
-                    ->badge()
-                    ->color('warning')
-                    ->searchable()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->date('d-m-Y H:s:i')
                     ->color('success')
